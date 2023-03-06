@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: greeting-operator
+spec:
+  template:
+    spec:
+      serviceAccountName: greeting-operator
+      restartPolicy: OnFailure
+      containers:
+      - name: greeting-operator
+        image: greeting-operator:latest
+        imagePullPolicy: Never
+        env:
+        - name: NAME
+          value: Foo Bar
+        - name: NAMESPACE
+          value: greeting
+        - name: PORT
+          value: "8080"
